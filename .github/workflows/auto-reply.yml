@@ -1,0 +1,20 @@
+name: Auto Reply Bot
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Auto Reply to Issues and PRs
+        uses: peter-evans/issue-comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number || github.event.pull_request.number }}
+          body: "👋 Hello! Thanks for opening this issue/PR. A maintainer will review it soon. 🚀"
